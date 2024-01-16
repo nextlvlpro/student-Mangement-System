@@ -12,13 +12,18 @@ export default function AddNewStudent() {
     const navigate = useNavigate('')
 
     function handleAdd () {
-        axios.post('/students/addstudent', {studentId:Number(id), studentName:name, StudentAge:age,StudentMobNum:number,StudentAddress:address }).then(({data})=> {
-            if (data == 'done') {
-                alert('New Student Added')
-                navigate('/studentspage')
-
-            }
-        })
+        if(id ==''||name==''||age==''||address=='') {
+            return alert('Fill all the fields')
+        } else {
+            axios.post('/students/addstudent', {studentId:Number(id), studentName:name, StudentAge:age,StudentMobNum:number,StudentAddress:address }).then(({data})=> {
+                if (data == 'done') {
+                    alert('New Student Added')
+                    navigate('/studentspage')
+    
+                }
+            })
+        }
+        
     }
 
     return (
